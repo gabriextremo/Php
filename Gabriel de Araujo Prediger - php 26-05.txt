@@ -1,0 +1,175 @@
+Gabriel de Araujo Prediger - 201910508
+
+Forms para as questoes 1 e 2.
+
+<form action="ex1.php" method="GET">
+	<input type="text" name="n">
+	<input type="text" name="n1">
+	<input type="text" name="n2">
+	<input type="text" name="n3">
+	<input type="text" name="n4">
+	<input type="submit">
+</form>
+
+<form action="ex2.php" method="GET">
+	<input type="text" name="n">
+	<input type="submit">
+</form>
+_____________
+<?php
+
+/* 
+Leia 5 nomes pelo teclado e envie para um arquivo todos aqueles que começarem com a letra a.
+ */
+    $n = $_GET['n'];
+    $n1 = $_GET['n1'];
+    $n2 = $_GET['n2'];
+    $n3 = $_GET['n3'];
+    $n4 = $_GET['n4'];
+    
+    $arquivo = fopen('ex1.txt', "w");
+    if (!$arquivo){
+        echo("Deu Ruim");
+    }
+    
+    if(substr($n,0,1) == "a" || substr($n, 0, 1) == "A" ){
+        fprintf($arquivo,"%s\n",$n);
+
+    }
+    
+    if(substr($n1,0,1) == "a"|| substr($n1, 0, 1) == "A"  ){
+        fprintf($arquivo,"%s\n",$n1);
+    }
+        
+    if(substr($n2,0,1) == "a"|| substr($n2, 0, 1) == "A"  ){
+         fprintf($arquivo,"%s\n",$n2);
+     }
+            
+     if(substr($n3,0,1) == "a"|| substr($n3, 0, 1) == "A"  ){
+      	fprintf($arquivo,"%s\n",$n3);
+     }
+            
+     if(substr($n4,0,1) == "a"|| substr($n4, 0, 1) == "A"  ){
+        fprintf($arquivo,"%s\n",$n4);
+       }
+   
+___________
+<?php
+/* 
+2) Leia do teclado um nome e envie para um arquivo apenas as vogais do mesmo.
+ */
+    $nome = $_GET['n'];
+    $tamanho = strlen($nome);
+    
+    $arquivo = fopen('ex2.txt','w');
+    
+    if(!$arquivo){
+        echo "deu problema";
+    }
+    
+    for($i=0; $i<$tamanho; $i++){
+        if (substr($nome, $i,1) == 'a' || substr($nome, $i,1)=='e' || substr($nome, $i,1)=='i' || substr($nome, $i,1)=='o' || substr($nome, $i,1)=='u'){
+            fprintf($arquivo,"%s",substr($nome, $i,1) );
+        } 
+    }
+    fclose($arquivo);
+______________________
+<?php
+/* 
+3) Leia uma frase de um arquivo e mostre na tela apenas as vogais
+ */
+
+    $arquivo = fopen('ex3.txt', 'r');
+    
+    
+    if (!$arquivo){
+        echo("Erro na abertura do arquivo\n");
+     }
+     
+     while(!feof($arquivo)){
+        $letra = fgetc($arquivo);
+        if($letra=='a' || $letra=='e' || $letra=='i' || $letra=='o' || $letra=='u'){
+            echo $letra;
+        }
+ }
+fclose($arquivo);
+_______________
+<?php
+
+/* 
+4) Leia uma frase de um arquivo e informe quantas vogais existem na referida frase
+ */
+
+    $arquivo = fopen('ex4.txt', 'r');
+    
+    
+    if (!$arquivo){
+        echo("Erro na abertura do arquivo\n");
+     }
+     
+     $x=0;
+     while(!feof($arquivo)){
+        $letra = fgetc($arquivo);
+        if($letra=='a' || $letra=='e' || $letra=='i' || $letra=='o' || $letra=='u'){
+            $x++;
+        }
+ }
+    echo "A frase tem ". $x . " vogais";
+fclose($arquivo);
+________
+<?php
+/* 
+ 5) Leia uma frase de um arquivo e mande apenas as vogais para um segundo arquivo
+ */
+
+    $arquivo = fopen('ex5.txt', 'r');
+    $arquivo2 = fopen('ex5_1.txt', 'w');
+    
+    
+    if (!$arquivo){
+        echo("Erro na abertura do arquivo\n");
+     }
+     if (!$arquivo2){
+        echo("Erro na abertura do arquivo\n");
+     }
+     
+     $x=0;
+     while(!feof($arquivo)){
+        $letra = fgetc($arquivo);
+        if($letra=='a' || $letra=='e' || $letra=='i' || $letra=='o' || $letra=='u'){
+            fprintf($arquivo2,"%s",$letra);
+        }
+ }
+
+    fclose($arquivo);
+    fclose($arquivo2);
+_____________________
+<?php
+
+/* 
+6) Leia um nome de um arquivo e envie o mesmo na ordem inversa para um segundo arquivo
+Exemplo: leu ROMA de um arquivo e enviou AMOR para um segundo arquivo
+ */
+
+    $arquivo = fopen('ex6.txt', 'r');
+    $arquivo2 = fopen('ex6_1.txt', 'w');
+    
+    if (!$arquivo){
+        echo("Erro na abertura do arquivo\n");
+     }
+     if (!$arquivo2){
+        echo("Erro na abertura do arquivo\n");
+     }
+    
+    $letra = fgets($arquivo);
+    $tamanho = strlen($letra);
+    
+    for ($x=0; $x<=$tamanho; $x++){
+        $tam = substr($letra, $tamanho-$x ,1);
+        fprintf($arquivo2,"%s",$tam);
+    }  
+
+     
+    fclose($arquivo);
+    fclose($arquivo2);
+
