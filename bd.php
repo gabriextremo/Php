@@ -24,3 +24,4 @@
   } 
     
     $conecta->close();
+?>
