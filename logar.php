@@ -29,7 +29,7 @@
         session_destroy();//destroi a sessão
         echo "<script> 
                 alert('Login ou senha incorreto');
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             </script>";
       }
 

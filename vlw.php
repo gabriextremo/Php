@@ -39,19 +39,25 @@
             die("Conexão falhou: " . $conecta->connect_error . "<br>");
         }
 
-        $sql = "select count(escrita) as escritaD from ususario where nome='$logado'";
+        $sql = "select escrita as escritaD from ususario where nome='$logado'";
 
         $resultado = $conecta->query($sql);
-
-
-        if ($resultado->num_rows > 0 || $resultado2->num_rows>0) {
-        // saída dos dados
-            while($linha = $resultado->fetch_assoc()) {
+        
+        while($linha = $resultado->fetch_assoc()) {
+            
                 $destro=$linha["escritaD"];
             }
-        } else {
-            echo "0 results";
+        
+        $sql2 = "select count(escrita) as escritaD from ususario where escrita='$destro'";
+        
+        $resultado2 = $conecta->query($sql2);
+        
+        while($linha2 = $resultado2->fetch_assoc()) {
+            
+            $destro=$linha2["escritaD"];
         }
+                
+                
          $conecta->close();
          ?>
          <script type="text/javascript">

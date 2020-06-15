@@ -18,7 +18,7 @@
     $sql = "insert into ususario(nome,email,escrita)values('$nome','$email','$escrita')";
     
     if ($conecta->query($sql) === TRUE) {
-        header('location:login.html');
+        header('location:index.html');
   } else {
         echo "Error: " . $sql . "<br>" . $conecta->error;
   } 
